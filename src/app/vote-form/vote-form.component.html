@@ -1,0 +1,21 @@
+<table>
+    <tr>
+        <th>Ország</th>
+        <th>Lakosság</th>
+        <th *ngFor="let value of voteValues">{{value}}</th>
+        <th>Szavazat</th>
+    </tr>
+<tr *ngFor="let countryVote of votingRecord.votes | keyvalue">
+    <td>{{countryVote.key.name}}</td>
+    <td>{{countryVote.key.population}}</td>
+    <td *ngFor="let voteValue of voteValues">
+            <input type="radio"
+                   [(ngModel)]="countryVote.value"
+                   [checked]="countryVote.value==voteValue"
+                   [value]="voteValue" 
+                   (click)="castVote(countryVote.key, voteValue)"/>
+                   {{voteValue}}
+        </td>
+        <td>{{countryVote.value}}</td>
+</tr>
+</table>
