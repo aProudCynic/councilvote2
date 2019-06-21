@@ -12,4 +12,5 @@
             ({{votingService.getVoteShareInNumberOfMemberStates(voteResult.key) | number}}%)
         </td>
     </tr>
+    <p>{{votingService.isPassed() ? 'Átment' : 'Nem ment át'}}</p>
 </table> 

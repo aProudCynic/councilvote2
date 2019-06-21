@@ -71,4 +71,9 @@ export class VotingService {
       / this.totalMemberStateNumberAndPopulation.numberOfMemberStates
       * 100;
   }
+
+  isPassed(): boolean {
+    return this.getVoteShareInPopulation(Vote.YES) >= 55
+    && this.getVoteShareInNumberOfMemberStates(Vote.YES) >= 65;
+  }
 }
