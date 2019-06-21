@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { VoteFormComponent } from './vote-form/vote-form.component';
 import { FormsModule } from '@angular/forms';
 import { ResultComponent } from './result/result.component';
+import { PresetButtonsComponent } from './preset-buttons/preset-buttons.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VoteFormComponent,
-    ResultComponent
+    ResultComponent,
+    PresetButtonsComponent
   ],
   imports: [
     BrowserModule,
