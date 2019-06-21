@@ -1,1 +1,1 @@
-<button type="button" (click)="setAllVotesToYes()">Mindenki igen</button>
+Minden szavazat átállítása: <button type="button" *ngFor="let voteKey of getAllVoteTypes()" (click)="setAllVotesTo(voteKey)">{{getVoteValueFor(voteKey)}}</button>

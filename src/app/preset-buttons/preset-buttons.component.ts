@@ -15,10 +15,37 @@ export class PresetButtonsComponent implements OnInit {
   ngOnInit() {
   }
 
-  setAllVotesToYes(): void  {
+  setAllVotesTo(voteKey: Vote): void {
     MemberState.memberStates.forEach(memberState => 
-      this.votingService.castVote(memberState, Vote.YES)
+      this.votingService.castVote(memberState, this.getVoteFor(voteKey))
     );
   }
 
+  getVoteFor(voteKey: string): Vote {
+    switch(voteKey) {
+      case 'YES': {
+        return Vote.YES;
+      }
+      case 'NO': {
+        return Vote.NO;
+      }
+      case 'ABSTAINED': {
+        return Vote.ABSTAINED;
+      }
+      case 'DID_NOT_VOTE': {
+        return Vote.DID_NOT_VOTE;
+      }
+      default: {
+        throw new Error('Invalid vote type!');
+      }
+    } 
+  }
+
+  getAllVoteTypes() {
+    return Object.keys(Vote);
+  }
+
+  getVoteValueFor(key: string) {
+    return Vote[key];
+  }
 }

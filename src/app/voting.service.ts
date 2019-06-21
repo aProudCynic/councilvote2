@@ -8,7 +8,7 @@ import { PopulationAndNumberOfMemberStates } from 'src/model/population-and-numb
   providedIn: 'root'
 })
 export class VotingService {
-  
+
   votingRecord: VotingRecord = new VotingRecord('test');
   voteCast: EventEmitter<any> = new EventEmitter();
   resultsByVotes: Map<Vote, PopulationAndNumberOfMemberStates> = new Map();
@@ -18,17 +18,16 @@ export class VotingService {
   constructor() {this.init(); }
 
   init(): void {
-    console.log('Oh hi!');
     Object.keys(Vote).forEach(
       vote => this.resultsByVotes.set(
         Vote[vote], new PopulationAndNumberOfMemberStates(0, 0)
       )
-    )
+    );
     MemberState.memberStates.forEach(memberState => 
       {
         this.totalMemberStateNumberAndPopulation.addMemberState(memberState);
       }
-    )
+    );
     this.resultsByVotes.set(Vote.DID_NOT_VOTE, new PopulationAndNumberOfMemberStates(
       this.totalMemberStateNumberAndPopulation.population,
       this.totalMemberStateNumberAndPopulation.numberOfMemberStates
@@ -38,42 +37,59 @@ export class VotingService {
 
   getResult() {
     this.votingRecord.votes.forEach(vote => {
-      console.log(vote); 
+      // onInit is not called for services, this is why initialization is done here
+      console.log(vote);
     });
   }
 
   castVote(memberState: MemberState, newVote: Vote) {
-    let previousVote: Vote = this.votingRecord.votes.get(memberState);
+    const previousVote: Vote = this.votingRecord.votes.get(memberState);
     this.votingRecord.votes.set(memberState, newVote);
-    let voteResultToBeReduced: PopulationAndNumberOfMemberStates = this.resultsByVotes.get(previousVote);
+    const voteResultToBeReduced: PopulationAndNumberOfMemberStates = this.resultsByVotes.get(previousVote);
     voteResultToBeReduced.substractMemberState(memberState);
-    let voteResultToIncremented: PopulationAndNumberOfMemberStates = this.resultsByVotes.get(newVote);
+    const voteResultToIncremented: PopulationAndNumberOfMemberStates = this.resultsByVotes.get(newVote);
     voteResultToIncremented.addMemberState(memberState);
     console.log(this.resultsByVotes);
   }
 
   getVoteShareInPopulation(vote: Vote): number {
     let populationOfMemberStatesForCorrespondingVote = this.resultsByVotes.get(vote).population;
-    if(populationOfMemberStatesForCorrespondingVote === 0)  {
+    if (populationOfMemberStatesForCorrespondingVote === 0)  {
       return 0;
     }
     return populationOfMemberStatesForCorrespondingVote
-      / this.totalMemberStateNumberAndPopulation.population
+      / this.getDividendForPopulationPercentageCalculation(vote)
       * 100;
+  }
+
+  getDividendForPopulationPercentageCalculation(vote: Vote): number {
+    let dividend = this.totalMemberStateNumberAndPopulation.population;
+    if (vote !== Vote.DID_NOT_VOTE) {
+      dividend -= this.resultsByVotes.get(Vote.DID_NOT_VOTE).population;
+    }
+    return dividend;
   }
 
   getVoteShareInNumberOfMemberStates(vote: Vote): number {
-    let numberOfMemberStatesForCorrespondingVote = this.resultsByVotes.get(vote).numberOfMemberStates;
-    if(numberOfMemberStatesForCorrespondingVote === 0)  {
+    const numberOfMemberStatesForCorrespondingVote = this.resultsByVotes.get(vote).numberOfMemberStates;
+    if (numberOfMemberStatesForCorrespondingVote === 0)  {
       return 0;
     }
     return numberOfMemberStatesForCorrespondingVote
-      / this.totalMemberStateNumberAndPopulation.numberOfMemberStates
+      / this.getDividendForMemberStateNumberPercentageCalculation(vote)
       * 100;
   }
 
+  getDividendForMemberStateNumberPercentageCalculation(vote: Vote): number {
+    let dividend = this.totalMemberStateNumberAndPopulation.numberOfMemberStates;
+    if (vote !== Vote.DID_NOT_VOTE) {
+      dividend -= this.resultsByVotes.get(Vote.DID_NOT_VOTE).numberOfMemberStates;
+    }
+    return dividend;
+  }
+
   isPassed(): boolean {
-    return this.getVoteShareInPopulation(Vote.YES) >= 55
-    && this.getVoteShareInNumberOfMemberStates(Vote.YES) >= 65;
+    return this.getVoteShareInPopulation(Vote.YES) >= 65
+    && this.getVoteShareInNumberOfMemberStates(Vote.YES) >= 55;
   }
 }

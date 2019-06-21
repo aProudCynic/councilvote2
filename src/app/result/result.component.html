@@ -1,16 +1,24 @@
 <table>
     <tr>
         <th>Szavazat</th>
-        <th>Népesség</th>
         <th>Országok száma</th>
+        <th>Népesség</th>
+    </tr>
+    <tr>
+        <th>Többséghez szükséges</th>
+        <th>55%</th>
+        <th>65%</th>
     </tr>
     <tr *ngFor="let voteResult of votingService.resultsByVotes | keyvalue">
         <td>{{voteResult.key}}</td>
-        <td>{{voteResult.value.population}}
-            ({{votingService.getVoteShareInPopulation(voteResult.key) | number}}%)</td>
-        <td>{{voteResult.value.numberOfMemberStates}} 
+        <td>
+            {{voteResult.value.numberOfMemberStates}} 
             ({{votingService.getVoteShareInNumberOfMemberStates(voteResult.key) | number}}%)
         </td>
+        <td>
+            {{voteResult.value.population}}
+            ({{votingService.getVoteShareInPopulation(voteResult.key) | number}}%)
+        </td>    
     </tr>
     <p>{{votingService.isPassed() ? 'Átment' : 'Nem ment át'}}</p>
 </table> 
