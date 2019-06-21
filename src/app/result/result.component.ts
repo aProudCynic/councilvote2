@@ -12,11 +12,8 @@ export class ResultComponent implements OnInit {
   constructor(votingService: VotingService) {
     this.votingService = votingService;
   }
+  
   ngOnInit() {
-  }
-
-  onFaszfej() {
-    this.votingService.getResult();
   }
 
 }
