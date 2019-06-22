@@ -7,7 +7,7 @@
     </tr>
 <tr *ngFor="let countryVote of votingRecord.votes | keyvalue">
     <td>{{countryVote.key.name}}</td>
-    <td>{{countryVote.key.population}}</td>
+    <td style="text-align: right">{{countryVote.key.population | number}}</td>
     <td *ngFor="let voteValue of voteValues">
             <input type="radio"
                    [(ngModel)]="countryVote.value"

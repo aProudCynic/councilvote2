@@ -12,7 +12,7 @@ import { PresetButtonsComponent } from './preset-buttons/preset-buttons.componen
     AppComponent,
     VoteFormComponent,
     ResultComponent,
-    PresetButtonsComponent
+    PresetButtonsComponent,
   ],
   imports: [
     BrowserModule,
