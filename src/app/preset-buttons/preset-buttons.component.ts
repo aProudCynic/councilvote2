@@ -22,18 +22,12 @@ export class PresetButtonsComponent implements OnInit {
   }
 
   setAllVotesForV4To(voteKey: Vote): void {
-    MemberState.memberStates.forEach(memberState => 
-      {
-        if (
-          memberState === MemberState.HUNGARY ||
-          memberState === MemberState.POLAND ||
-          memberState === MemberState.CZECH_REPUBLIC ||
-          memberState === MemberState.SLOVAKIA
-        ) {
-          this.votingService.castVote(memberState, this.getVoteFor(voteKey));
-        }
-      }
-    )
+    this.votingService.castVoteForMultipleMemberStates([
+      MemberState.HUNGARY,
+      MemberState.POLAND,
+      MemberState.CZECH_REPUBLIC,
+      MemberState.SLOVAKIA
+    ], this.getVoteFor(voteKey));
   }
 
   // Necessary due to TypeScript enum deficiencies compared to Java; consider moving to Vote enum.

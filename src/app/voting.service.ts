@@ -52,6 +52,10 @@ export class VotingService {
     console.log(this.resultsByVotes);
   }
 
+  castVoteForMultipleMemberStates(memberStates: MemberState[], newVote: Vote) {
+    memberStates.forEach(memberState => this.castVote(memberState, newVote));
+  }
+
   getVoteShareInPopulation(vote: Vote): number {
     let populationOfMemberStatesForCorrespondingVote = this.resultsByVotes.get(vote).population;
     if (populationOfMemberStatesForCorrespondingVote === 0)  {
