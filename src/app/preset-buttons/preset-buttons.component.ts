@@ -21,6 +21,19 @@ export class PresetButtonsComponent implements OnInit {
     );
   }
 
+  setAllVotesForV4To(voteKey: Vote): void {
+    MemberState.memberStates.forEach(memberState => 
+      {
+        if (memberState.name === 'Csehország' ||
+        memberState.name === 'Lengyelország' ||
+        memberState.name === 'Magyarország' ||
+        memberState.name === 'Szlovákia') {
+          this.votingService.castVote(memberState, this.getVoteFor(voteKey))
+        }
+      }
+    )
+  }
+
   getVoteFor(voteKey: string): Vote {
     switch(voteKey) {
       case 'YES': {

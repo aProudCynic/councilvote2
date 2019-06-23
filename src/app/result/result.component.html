@@ -12,11 +12,11 @@
     <tr *ngFor="let voteResult of votingService.resultsByVotes | keyvalue">
         <td>{{voteResult.key}}</td>
         <td>
-            {{voteResult.value.numberOfMemberStates}} 
+            {{voteResult.value.numberOfMemberStates | number}} 
             ({{votingService.getVoteShareInNumberOfMemberStates(voteResult.key) | number}}%)
         </td>
         <td>
-            {{voteResult.value.population}}
+            {{voteResult.value.population | number}}
             ({{votingService.getVoteShareInPopulation(voteResult.key) | number}}%)
         </td>    
     </tr>

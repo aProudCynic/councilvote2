@@ -1,7 +1,9 @@
 export class MemberState {
 
+    static readonly BELGIUM = new MemberState('Belgium', 11413058);
+
     static memberStates: MemberState[] = [
-        new MemberState('Belgium', 11413058),
+        MemberState.BELGIUM,
         new MemberState('Bulgária', 7050034),
         new MemberState('Csehország', 10610055),
         new MemberState('Dánia', 5781190),

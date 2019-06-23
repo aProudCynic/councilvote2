@@ -3,3 +3,8 @@
     *ngFor="let voteKey of getAllVoteTypes()" 
     (click)="setAllVotesTo(voteKey)">{{getVoteValueFor(voteKey)}}</button>
 </p>
+<p>V4 átállítása: <button 
+    type="button" 
+    *ngFor="let voteKey of getAllVoteTypes()" 
+    (click)="setAllVotesForV4To(voteKey)">{{getVoteValueFor(voteKey)}}</button>
+</p>
