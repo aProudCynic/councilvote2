@@ -9,13 +9,17 @@ import { PopulationAndNumberOfMemberStates } from 'src/model/population-and-numb
 })
 export class VotingService {
 
+  constructor() {this.init(); }
+
+  static readonly POPULATION_THRESHOLD_PERCENT = 65;
+
+  static readonly MEMBER_STATE_THRESHOLD_PERCENT = 55;
+
   votingRecord: VotingRecord = new VotingRecord('test');
   voteCast: EventEmitter<any> = new EventEmitter();
   resultsByVotes: Map<Vote, PopulationAndNumberOfMemberStates> = new Map();
   totalMemberStateNumberAndPopulation: PopulationAndNumberOfMemberStates = 
     new PopulationAndNumberOfMemberStates(0, 0);
-
-  constructor() {this.init(); }
 
   init(): void {
     Object.keys(Vote).forEach(
@@ -93,7 +97,7 @@ export class VotingService {
   }
 
   isPassed(): boolean {
-    return this.getVoteShareInPopulation(Vote.YES) >= 65
-    && this.getVoteShareInNumberOfMemberStates(Vote.YES) >= 55;
+    return this.getVoteShareInPopulation(Vote.YES) >= VotingService.POPULATION_THRESHOLD_PERCENT
+    && this.getVoteShareInNumberOfMemberStates(Vote.YES) >= VotingService.MEMBER_STATE_THRESHOLD_PERCENT;
   }
 }
