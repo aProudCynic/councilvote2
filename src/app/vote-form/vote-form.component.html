@@ -8,7 +8,7 @@
     </tr>
 <tr *ngFor="let memberStateVote of votingRecord.votes | keyvalue">
     <td>{{memberStateVote.key.name}}</td>
-    <td style="text-align: right">{{memberStateVote.key.population | number}}</td>
+    <td style="text-align: right">{{memberStateVote.key.population | number}} ({{getPopulationPercentOfAll(memberStateVote.key) | number}}%)</td>
     <td *ngFor="let voteValue of voteValues">
             <input type="radio"
                    [(ngModel)]="memberStateVote.value"
@@ -18,6 +18,8 @@
                    {{voteValue}}
     </td>
     <td>{{memberStateVote.key.leader.name}} ({{memberStateVote.key.leader.type}})</td>
-    <td>{{memberStateVote.key.leader.politicalGroup}}</td>
+    <td 
+        [style.background-color]="getBackgroundColorFor(memberStateVote.key.leader.politicalGroup)"
+    >{{memberStateVote.key.leader.politicalGroup}}</td>
 </tr>
 </table>

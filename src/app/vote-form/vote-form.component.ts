@@ -3,6 +3,7 @@ import { VotingService } from '../voting.service';
 import { VotingRecord } from 'src/model/voting-record.model';
 import { Vote } from 'src/model/vote.model';
 import { MemberState } from 'src/model/country.model';
+import { PoliticalGroup } from 'src/model/political-group.model';
 
 @Component({
   selector: 'app-vote-form',
@@ -29,6 +30,27 @@ export class VoteFormComponent implements OnInit {
 
   castVote(memberState: MemberState, vote: Vote) {
     this.votingService.castVote(memberState, vote);
+  }
+
+  getPopulationPercentOfAll(memberState: MemberState): number {
+    return memberState.population / this.votingService.totalMemberStateNumberAndPopulation.population * 100;
+  }
+
+  getBackgroundColorFor(politicalGroup: PoliticalGroup) {
+    switch(politicalGroup) {
+      case PoliticalGroup.EPP:
+        return 'blue';
+      case PoliticalGroup.SD:
+        return 'red';
+      case PoliticalGroup.RENEW_EUROPE:
+        return 'yellow';
+      case PoliticalGroup.ECR:
+          return 'darkblue';
+      case PoliticalGroup.GUE_NGL:
+        return 'darkred';
+      default:
+        return '#FFFFFF';
+    }
   }
 
 }
