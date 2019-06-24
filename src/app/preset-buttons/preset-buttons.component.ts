@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VotingService } from '../voting.service';
 import { MemberState } from 'src/model/country.model';
 import { Vote } from 'src/model/vote.model';
+import { PoliticalGroup } from 'src/model/political-group.model';
 
 @Component({
   selector: 'app-preset-buttons',
@@ -9,6 +10,8 @@ import { Vote } from 'src/model/vote.model';
   styleUrls: ['./preset-buttons.component.css']
 })
 export class PresetButtonsComponent implements OnInit {
+
+  selectedPoliticalGroupKey: string;
 
   constructor(private votingService: VotingService) { }
 
@@ -30,9 +33,24 @@ export class PresetButtonsComponent implements OnInit {
     ], this.getVoteFor(voteKey));
   }
 
+  setAllVotesForPoliticalGroup(voteKey: Vote): void {
+    console.log(this.selectedPoliticalGroupKey);
+    if (this.selectedPoliticalGroupKey != null) {
+      console.log(this.selectedPoliticalGroupKey);
+      MemberState.memberStates.forEach(memberState => 
+        {
+          console.log(memberState.leader.politicalGroup, this.selectedPoliticalGroupKey);
+          if (memberState.leader.politicalGroup === PoliticalGroup[this.selectedPoliticalGroupKey]) {
+            this.votingService.castVote(memberState, this.getVoteFor(voteKey));
+          }
+        }
+      )
+    }
+  }
+
   // Necessary due to TypeScript enum deficiencies compared to Java; consider moving to Vote enum.
   getVoteFor(voteKey: string): Vote {
-    switch(voteKey) {
+    switch (voteKey) {
       case 'YES': {
         return Vote.YES;
       }
@@ -57,5 +75,9 @@ export class PresetButtonsComponent implements OnInit {
 
   getVoteValueFor(key: string) {
     return Vote[key];
+  }
+
+  getPoliticalGroups(): [string, any][] {
+    return Object.entries(PoliticalGroup);
   }
 }

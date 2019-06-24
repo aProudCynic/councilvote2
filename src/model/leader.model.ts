@@ -1,12 +1,18 @@
 import { PoliticalGroup } from './political-group.model';
 
-export class MemberState {
+export class Leader {
     name: string;
     politicalGroup: PoliticalGroup;
     type: LeaderType;
+
+    constructor(name: string, politicalGroup: PoliticalGroup, type: LeaderType) {
+        this.name = name;
+        this.politicalGroup = politicalGroup;
+        this.type = type;
+    }
 }
 
 export enum LeaderType {
-    PRESIDENT = 'elnök',
-    PRIME_MINISTER = 'miniszterelnök'
+    HEAD_OF_STATE = 'kormányfő',
+    HEAD_OF_GOVERNMENT = 'államfő'
 }

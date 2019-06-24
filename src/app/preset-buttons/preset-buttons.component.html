@@ -8,3 +8,12 @@
     *ngFor="let voteKey of getAllVoteTypes()" 
     (click)="setAllVotesForV4To(voteKey)">{{getVoteValueFor(voteKey)}}</button>
 </p>
+<select name="politicalGroups" [(ngModel)]="selectedPoliticalGroupKey">
+    <option *ngFor="let politicalGroup of getPoliticalGroups()" [value]="politicalGroup[0]">
+        {{politicalGroup[1]}}
+    </option>
+</select> 
+<button 
+    type="button" 
+    *ngFor="let voteKey of getAllVoteTypes()" 
+    (click)="setAllVotesForPoliticalGroup(voteKey)">{{getVoteValueFor(voteKey)}}</button>
