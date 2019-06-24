@@ -2,20 +2,22 @@
     <tr>
         <th>Ország</th>
         <th>Lakosság</th>
-        <th *ngFor="let value of voteValues">{{value}}</th>
-        <th>Szavazat</th>
+        <th colspan="4">Szavazat</th>
+        <th>Vezető</th>
+        <th>Vezető politikai csoportja</th>
     </tr>
-<tr *ngFor="let countryVote of votingRecord.votes | keyvalue">
-    <td>{{countryVote.key.name}}</td>
-    <td style="text-align: right">{{countryVote.key.population | number}}</td>
+<tr *ngFor="let memberStateVote of votingRecord.votes | keyvalue">
+    <td>{{memberStateVote.key.name}}</td>
+    <td style="text-align: right">{{memberStateVote.key.population | number}}</td>
     <td *ngFor="let voteValue of voteValues">
             <input type="radio"
-                   [(ngModel)]="countryVote.value"
-                   [checked]="countryVote.value==voteValue"
+                   [(ngModel)]="memberStateVote.value"
+                   [checked]="memberStateVote.value==voteValue"
                    [value]="voteValue" 
-                   (click)="castVote(countryVote.key, voteValue)"/>
+                   (click)="castVote(memberStateVote.key, voteValue)"/>
                    {{voteValue}}
-        </td>
-        <td>{{countryVote.value}}</td>
+    </td>
+    <td>{{memberStateVote.key.leader.name}} ({{memberStateVote.key.leader.type}})</td>
+    <td>{{memberStateVote.key.leader.politicalGroup}}</td>
 </tr>
 </table>

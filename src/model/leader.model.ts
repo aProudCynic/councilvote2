@@ -13,6 +13,6 @@ export class Leader {
 }
 
 export enum LeaderType {
-    HEAD_OF_STATE = 'kormányfő',
-    HEAD_OF_GOVERNMENT = 'államfő'
+    HEAD_OF_STATE = 'államfő',
+    HEAD_OF_GOVERNMENT = 'kormányfő'
 }
