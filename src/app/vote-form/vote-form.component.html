@@ -17,9 +17,11 @@
                    (click)="castVote(memberStateVote.key, voteValue)"/>
                    {{voteValue}}
     </td>
-    <td>{{memberStateVote.key.leader.name}} ({{memberStateVote.key.leader.type}})</td>
-    <td 
-        [style.background-color]="getBackgroundColorFor(memberStateVote.key.leader.politicalGroup)"
+    <td data-toggle="tooltip" [title]="memberStateVote.key.leader.type">
+        {{memberStateVote.key.leader.name}}
+    </td>
+    <td style="border-left-style: solid; border-width: 10px"
+        [style.border-color]="getBackgroundColorFor(memberStateVote.key.leader.politicalGroup)"
     >{{memberStateVote.key.leader.politicalGroup}}</td>
 </tr>
 </table>

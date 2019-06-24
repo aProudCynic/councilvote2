@@ -4,10 +4,10 @@
         <th>Országok száma</th>
         <th>Népesség</th>
     </tr>
-    <tr>
-        <th>Többséghez szükséges</th>
-        <th>55%</th>
-        <th>65%</th>
+    <tr style="font-weight: bold;">
+        <td>Többséghez szükséges</td>
+        <td>55%</td>
+        <td>65%</td>
     </tr>
     <tr *ngFor="let voteResult of votingService.resultsByVotes | keyvalue">
         <td>{{voteResult.key}}</td>
@@ -20,5 +20,7 @@
             ({{votingService.getVoteShareInPopulation(voteResult.key) | number}}%)
         </td>    
     </tr>
-    <p>{{votingService.isPassed() ? 'Átment' : 'Nem ment át'}}</p>
 </table> 
+<h1 [style.color]="votingService.isPassed() ? 'green' : 'red'">
+    {{votingService.isPassed() ? 'Átment' : 'Nem ment át'}}
+</h1>
