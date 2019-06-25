@@ -1,22 +1,40 @@
-<p>Minden tagállam: <button 
-    type="button" 
-    *ngFor="let voteKey of getAllVoteTypes()" 
-    (click)="setAllVotesTo(voteKey)">{{getVoteValueFor(voteKey)}}</button>
+<p>Minden tagállam: 
+    <span *ngFor="let voteKey of getAllVoteTypes()">
+        <button 
+        type="button" 
+        [class]="getButtonClass(voteKey)"
+        (click)="setAllVotesTo(voteKey)">
+            {{getVoteValueFor(voteKey)}}
+        </button>
+        <span>&nbsp;</span>
+    </span>
 </p>
-<p>Visegrádi négyek: <button 
-    type="button" 
-    *ngFor="let voteKey of getAllVoteTypes()" 
-    (click)="setAllVotesForV4To(voteKey)">{{getVoteValueFor(voteKey)}}</button>
+<p>Visegrádi négyek: 
+    <span *ngFor="let voteKey of getAllVoteTypes()">
+        <button 
+        type="button" 
+        [class]="getButtonClass(voteKey)"
+        (click)="setAllVotesForV4To(voteKey)">
+            {{getVoteValueFor(voteKey)}}
+        </button>
+        <span>&nbsp;</span>
+    </span>
 </p>
-<p>Politikai csoport: <select name="politicalGroups" [(ngModel)]="selectedPoliticalGroupKey">
+<p>Politikai csoport: <select 
+    name="politicalGroups" 
+    [(ngModel)]="selectedPoliticalGroupKey">
         <option *ngFor="let politicalGroup of getPoliticalGroups()" [value]="politicalGroup[0]">
             {{politicalGroup[1]}}
         </option>
     </select> 
-    <button 
-    type="button" 
-    *ngFor="let voteKey of getAllVoteTypes()" 
-    (click)="setAllVotesForPoliticalGroup(voteKey)">
-        {{getVoteValueFor(voteKey)}}
-    </button>
+    <span>&nbsp;</span>
+    <span *ngFor="let voteKey of getAllVoteTypes()">
+            <button 
+            type="button" 
+            [class]="getButtonClass(voteKey)"
+            (click)="setAllVotesForPoliticalGroup(voteKey)">
+                {{getVoteValueFor(voteKey)}}
+            </button>
+            <span>&nbsp;</span>
+        </span>
 </p>

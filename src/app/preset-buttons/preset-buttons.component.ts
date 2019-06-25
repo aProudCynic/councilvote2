@@ -11,6 +11,11 @@ import { PoliticalGroup } from 'src/model/political-group.model';
 })
 export class PresetButtonsComponent implements OnInit {
 
+  private static readonly VOTE_KEY_YES = 'YES';
+  private static readonly VOTE_KEY_NO = 'NO';
+  private static readonly VOTE_KEY_ABSTAINED = 'ABSTAINED';
+  private static readonly VOTE_KEY_DID_NOT_VOTE = 'DID_NOT_VOTE';
+
   selectedPoliticalGroupKey: string;
 
   constructor(private votingService: VotingService) { }
@@ -34,12 +39,9 @@ export class PresetButtonsComponent implements OnInit {
   }
 
   setAllVotesForPoliticalGroup(voteKey: Vote): void {
-    console.log(this.selectedPoliticalGroupKey);
     if (this.selectedPoliticalGroupKey != null) {
-      console.log(this.selectedPoliticalGroupKey);
       MemberState.memberStates.forEach(memberState => 
         {
-          console.log(memberState.leader.politicalGroup, this.selectedPoliticalGroupKey);
           if (memberState.leader.politicalGroup === PoliticalGroup[this.selectedPoliticalGroupKey]) {
             this.votingService.castVote(memberState, this.getVoteFor(voteKey));
           }
@@ -51,22 +53,22 @@ export class PresetButtonsComponent implements OnInit {
   // Necessary due to TypeScript enum deficiencies compared to Java; consider moving to Vote enum.
   getVoteFor(voteKey: string): Vote {
     switch (voteKey) {
-      case 'YES': {
+      case PresetButtonsComponent.VOTE_KEY_YES: {
         return Vote.YES;
       }
-      case 'NO': {
+      case PresetButtonsComponent.VOTE_KEY_NO: {
         return Vote.NO;
       }
-      case 'ABSTAINED': {
+      case PresetButtonsComponent.VOTE_KEY_ABSTAINED: {
         return Vote.ABSTAINED;
       }
-      case 'DID_NOT_VOTE': {
+      case PresetButtonsComponent.VOTE_KEY_DID_NOT_VOTE: {
         return Vote.DID_NOT_VOTE;
       }
       default: {
         throw new Error('Invalid vote type!');
       }
-    } 
+    }
   }
 
   getAllVoteTypes() {
@@ -80,4 +82,31 @@ export class PresetButtonsComponent implements OnInit {
   getPoliticalGroups(): [string, any][] {
     return Object.entries(PoliticalGroup);
   }
+
+  getButtonClass(voteKey: string): string {
+    let changingClassPart: string;
+    switch (voteKey) {
+      case PresetButtonsComponent.VOTE_KEY_YES: {
+        changingClassPart = 'success';
+        break;
+      }
+      case PresetButtonsComponent.VOTE_KEY_NO: {
+        changingClassPart = 'danger';
+        break;
+      }
+      case PresetButtonsComponent.VOTE_KEY_ABSTAINED: {
+        changingClassPart = 'warning';
+        break;
+      }
+      case PresetButtonsComponent.VOTE_KEY_DID_NOT_VOTE: {
+        changingClassPart = 'secondary';
+        break;
+      }
+      default: {
+        throw new Error('Invalid vote type!');
+      }
+    }
+    return `btn btn-${changingClassPart} btn-sm`;
+  }
+
 }
