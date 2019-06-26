@@ -97,7 +97,28 @@ export class VotingService {
   }
 
   isPassed(): boolean {
-    return this.getVoteShareInPopulation(Vote.YES) >= VotingService.POPULATION_THRESHOLD_PERCENT
-    && this.getVoteShareInNumberOfMemberStates(Vote.YES) >= VotingService.MEMBER_STATE_THRESHOLD_PERCENT;
+    return this.atLeastCountryVoted()
+    && (
+      this.getVoteShareInPopulation(Vote.YES) >= VotingService.POPULATION_THRESHOLD_PERCENT
+      && this.getVoteShareInNumberOfMemberStates(Vote.YES) >= VotingService.MEMBER_STATE_THRESHOLD_PERCENT
+    )
+    || this.isUnsuccessfulBlockingMinorty();
+  }
+
+  isUnsuccessfulBlockingMinorty(): boolean {
+    return this.atLeastCountryVoted()
+    && (
+      this.getVoteShareInPopulation(Vote.YES) 
+      < VotingService.POPULATION_THRESHOLD_PERCENT
+      && (
+        this.resultsByVotes.get(Vote.NO).numberOfMemberStates + 
+        this.resultsByVotes.get(Vote.ABSTAINED).numberOfMemberStates
+      )
+      < 4
+    );
+  }
+  atLeastCountryVoted() {
+    return this.resultsByVotes.get(Vote.DID_NOT_VOTE).numberOfMemberStates
+    < MemberState.memberStates.length;
   }
 }

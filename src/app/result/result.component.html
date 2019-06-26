@@ -57,7 +57,8 @@
     </div>
 </div>
 
-<h1 [style.background-color]="votingService.isPassed() ? 'green' : 'red'"
+<h1 *ngIf="votingService.atLeastCountryVoted()"
+[style.background-color]="votingService.isPassed() ? 'green' : 'red'"
 style="color: white; text-align: center; width: 100%; border-radius: 5px">
-    {{votingService.isPassed() ? 'Átment' : 'Nem ment át'}}
+    {{getResult()}}
 </h1>

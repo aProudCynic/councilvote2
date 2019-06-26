@@ -44,4 +44,17 @@ export class ResultComponent implements OnInit {
   getMemberStateThresholdPercent() {
     return VotingService.MEMBER_STATE_THRESHOLD_PERCENT;
   }
+
+  getResult() {
+    let result: string;
+    if (this.votingService.isPassed()) {
+      result = 'Átment';
+      if (this.votingService.isUnsuccessfulBlockingMinorty()) {
+        result += ' (legalább négy ország kell a blokkoló kisebbséghez)';
+      }
+    } else {
+      result = 'Nem ment át';
+    }
+    return result;
+  }
 }
