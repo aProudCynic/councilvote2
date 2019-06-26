@@ -10,15 +10,28 @@
         <td>{{getPopulationThresholdPercent()}}%</td>
     </tr>
     <tr *ngFor="let voteResult of votingService.resultsByVotes | keyvalue">
-        <td>{{voteResult.key}}</td>
+        <ng-container *ngIf="isNotDidNotVote(voteResult.key)">
+            <td>{{voteResult.key}}</td>
+            <td>
+                {{voteResult.value.numberOfMemberStates | number}} 
+                ({{votingService.getVoteShareInNumberOfMemberStates(voteResult.key) | number}}%)
+            </td>
+            <td>
+                {{voteResult.value.population | number}}
+                ({{votingService.getVoteShareInPopulation(voteResult.key) | number}}%)
+            </td>
+        </ng-container>
+    </tr>
+    <tr class="border_top">
+        <td>{{getDidNotVote()}}</td>
         <td>
-            {{voteResult.value.numberOfMemberStates | number}} 
-            ({{votingService.getVoteShareInNumberOfMemberStates(voteResult.key) | number}}%)
+            {{getDidNotVoteResults().numberOfMemberStates | number}} 
+            ({{votingService.getVoteShareInNumberOfMemberStates(getDidNotVote()) | number}}%)
         </td>
         <td>
-            {{voteResult.value.population | number}}
-            ({{votingService.getVoteShareInPopulation(voteResult.key) | number}}%)
-        </td>    
+            {{getDidNotVoteResults().population | number}}
+            ({{votingService.getVoteShareInPopulation(getDidNotVote()) | number}}%)
+        </td>
     </tr>
 </table> 
 <p style="text-align: center">Tagállamok száma</p>
@@ -48,7 +61,6 @@
 <div class="progress">
     <div *ngFor="let voteResult of votingService.resultsByVotes | keyvalue">
             <div 
-            *ngIf="voteResult.key != 'Nem szavazott'"
             [class]="getProgressBarClass(voteResult.key)" 
             role="progressbar" 
             [style.width]="votingService.getVoteShareInPopulation(voteResult.key) + '%'">

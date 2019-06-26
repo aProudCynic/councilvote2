@@ -18,7 +18,6 @@ export class ResultComponent implements OnInit {
   }
 
   getProgressBarClass(voteResultKey: string): string {
-    console.log(voteResultKey);
     let voteSpecificClassPart: string;
     switch (voteResultKey) {
       case Vote.YES: {
@@ -56,5 +55,18 @@ export class ResultComponent implements OnInit {
       result = 'Nem ment át';
     }
     return result;
+  }
+
+  isNotDidNotVote(vote: Vote): boolean {
+    console.log(vote, Vote.DID_NOT_VOTE, vote !== Vote.DID_NOT_VOTE);
+    return vote !== Vote.DID_NOT_VOTE;
+  }
+
+  getDidNotVoteResults() {
+    return this.votingService.resultsByVotes.get(Vote.DID_NOT_VOTE);
+  }
+
+  getDidNotVote() {
+    return Vote.DID_NOT_VOTE;
   }
 }
