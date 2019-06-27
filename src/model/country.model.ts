@@ -16,7 +16,7 @@ export class MemberState {
         new Leader('Andrej Babiš', PoliticalGroup.RENEW_EUROPE, LeaderType.HEAD_OF_GOVERNMENT)
     );
     static readonly DENMARK = new MemberState('Dánia', 5781190,
-        new Leader('Lars Løkke Rasmussen', PoliticalGroup.RENEW_EUROPE, LeaderType.HEAD_OF_GOVERNMENT)
+        new Leader('Mette Frederiksen', PoliticalGroup.SD, LeaderType.HEAD_OF_GOVERNMENT)
     );
     static readonly GERMANY = new MemberState('Németország', 82850000,
         new Leader('Angela Merkel', PoliticalGroup.EPP, LeaderType.HEAD_OF_GOVERNMENT)
