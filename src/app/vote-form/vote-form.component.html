@@ -10,12 +10,14 @@
     <td>{{memberStateVote.key.name}}</td>
     <td style="text-align: right">{{memberStateVote.key.population | number}} ({{getPopulationPercentOfAll(memberStateVote.key) | number}}%)</td>
     <td *ngFor="let voteValue of voteValues">
-            <input type="radio"
+            <label>
+        <input type="radio"
                    [(ngModel)]="memberStateVote.value"
                    [checked]="memberStateVote.value==voteValue"
                    [value]="voteValue" 
                    (click)="castVote(memberStateVote.key, voteValue)"/>
-                   {{voteValue}}
+        <span [class]="getVoteIconClass(voteValue)" style="padding-left: 5px" [style.color]="getVoteColor(voteValue)"></span>
+            </label>
     </td>
     <td data-toggle="tooltip" [title]="memberStateVote.key.leader.type">
         {{memberStateVote.key.leader.name}}

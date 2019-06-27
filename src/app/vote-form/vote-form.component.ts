@@ -53,4 +53,32 @@ export class VoteFormComponent implements OnInit {
     }
   }
 
+  getVoteIconClass(vote: Vote): string {
+    let iconClass: string = 'glyphicon glyphicon-'
+    switch(vote) {
+      case Vote.YES: 
+        iconClass += 'thumbs-up';
+        break;
+      case Vote.NO: 
+        iconClass += 'thumbs-down';
+        break;
+        case Vote.ABSTAINED: 
+          iconClass += 'question-sign';
+          break;
+      case Vote.DID_NOT_VOTE: 
+        iconClass += 'remove';
+        break;
+    }
+    return iconClass;
+  }
+
+  getVoteColor(vote: Vote): string {
+    switch(vote) {
+      case Vote.YES: return 'green';
+      case Vote.NO: return 'red';
+      case Vote.ABSTAINED: return 'orange';
+      case Vote.DID_NOT_VOTE: return 'lightgrey';
+    }
+    
+  }
 }
