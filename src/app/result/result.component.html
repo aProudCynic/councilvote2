@@ -12,11 +12,11 @@
     <tr *ngFor="let voteResult of votingService.resultsByVotes | keyvalue">
         <ng-container *ngIf="isNotDidNotVote(voteResult.key)">
             <td>{{voteResult.key}}</td>
-            <td>
+            <td data-toggle="tooltip" data-placement="top" title="A szavazó tagállamokhoz képest (az igenek, a nemek és a tartózkodások aránya a kerekítések miatt eltérhet 100%-tól)">
                 {{voteResult.value.numberOfMemberStates | number}} 
                 ({{votingService.getVoteShareInNumberOfMemberStates(voteResult.key) | number}}%)
             </td>
-            <td>
+            <td data-toggle="tooltip" data-placement="top" title="A szavazó tagállamokhoz képest (az igenek, a nemek és a tartózkodások aránya a kerekítések miatt eltérhet 100%-tól)">
                 {{voteResult.value.population | number}}
                 ({{votingService.getVoteShareInPopulation(voteResult.key) | number}}%)
             </td>
@@ -24,11 +24,11 @@
     </tr>
     <tr class="border_top">
         <td>{{getDidNotVote()}}</td>
-        <td>
+        <td data-toggle="tooltip" data-placement="top" title="Az összes tagállamhoz képest">
             {{getDidNotVoteResults().numberOfMemberStates | number}} 
             ({{votingService.getVoteShareInNumberOfMemberStates(getDidNotVote()) | number}}%)
         </td>
-        <td>
+        <td data-toggle="tooltip" data-placement="top" title="Az összes tagállamhoz képest">
             {{getDidNotVoteResults().population | number}}
             ({{votingService.getVoteShareInPopulation(getDidNotVote()) | number}}%)
         </td>
