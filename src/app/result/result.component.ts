@@ -13,7 +13,7 @@ export class ResultComponent implements OnInit {
   constructor(votingService: VotingService) {
     this.votingService = votingService;
   }
-  
+
   ngOnInit() {
   }
 
@@ -58,7 +58,6 @@ export class ResultComponent implements OnInit {
   }
 
   isNotDidNotVote(vote: Vote): boolean {
-    console.log(vote, Vote.DID_NOT_VOTE, vote !== Vote.DID_NOT_VOTE);
     return vote !== Vote.DID_NOT_VOTE;
   }
 

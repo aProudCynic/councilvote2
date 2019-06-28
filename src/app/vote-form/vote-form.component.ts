@@ -18,7 +18,6 @@ export class VoteFormComponent implements OnInit {
   constructor(votingService: VotingService) {
     this.votingService = votingService;
     this.votingRecord = this.votingService.votingRecord;
-    console.log(this.votingRecord.votes);
    }
 
   ngOnInit() {

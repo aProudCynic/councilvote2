@@ -36,14 +36,6 @@ export class VotingService {
       this.totalMemberStateNumberAndPopulation.population,
       this.totalMemberStateNumberAndPopulation.numberOfMemberStates
     ));
-    console.log(this.resultsByVotes);
-  }
-
-  getResult() {
-    this.votingRecord.votes.forEach(vote => {
-      // onInit is not called for services, this is why initialization is done here
-      console.log(vote);
-    });
   }
 
   castVote(memberState: MemberState, newVote: Vote) {
@@ -53,7 +45,6 @@ export class VotingService {
     voteResultToBeReduced.substractMemberState(memberState);
     const voteResultToIncremented: PopulationAndNumberOfMemberStates = this.resultsByVotes.get(newVote);
     voteResultToIncremented.addMemberState(memberState);
-    console.log(this.resultsByVotes);
   }
 
   castVoteForMultipleMemberStates(memberStates: MemberState[], newVote: Vote) {
@@ -61,7 +52,7 @@ export class VotingService {
   }
 
   getVoteShareInPopulation(vote: Vote): number {
-    let populationOfMemberStatesForCorrespondingVote = this.resultsByVotes.get(vote).population;
+    const populationOfMemberStatesForCorrespondingVote = this.resultsByVotes.get(vote).population;
     if (populationOfMemberStatesForCorrespondingVote === 0)  {
       return 0;
     }

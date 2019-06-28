@@ -117,7 +117,7 @@ export class MemberState {
         MemberState.FINLAND,
         MemberState.SWEDEN,
         MemberState.UK
-      ];
+      ].sort((ms1, ms2) => ms1.name.localeCompare(ms2.name));
 
     name: string;
     population: number;

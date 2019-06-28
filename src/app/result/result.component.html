@@ -61,6 +61,7 @@
 <div class="progress">
     <div *ngFor="let voteResult of votingService.resultsByVotes | keyvalue">
             <div 
+            *ngIf="voteResult.key != 'Nem szavazott'"
             [class]="getProgressBarClass(voteResult.key)" 
             role="progressbar" 
             [style.width]="votingService.getVoteShareInPopulation(voteResult.key) + '%'">
