@@ -109,4 +109,8 @@ export class PresetButtonsComponent implements OnInit {
     return `btn btn-${changingClassPart} btn-sm`;
   }
 
+  getNumberOfMemberStatesWithLeaderAffiliatedTo(politicalGroup: PoliticalGroup): number {
+    return MemberState.memberStates.filter(memberState => memberState.leader.politicalGroup === politicalGroup).length;
+  }
+
 }

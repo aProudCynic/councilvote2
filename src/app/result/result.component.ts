@@ -68,4 +68,13 @@ export class ResultComponent implements OnInit {
   getDidNotVote() {
     return Vote.DID_NOT_VOTE;
   }
+
+  getWidthForMemberStateThreshold(): string {
+    return this.getMemberStateThresholdPercent() + '%';
+  }
+
+
+  getWidthForPopulationThreshold(): string {
+    return this.getPopulationThresholdPercent() + '%';
+  }
 }

@@ -23,9 +23,12 @@
 <p>Politikai csoport: <select 
     name="politicalGroups" 
     [(ngModel)]="selectedPoliticalGroupKey">
-        <option *ngFor="let politicalGroup of getPoliticalGroups()" [value]="politicalGroup[0]">
-            {{politicalGroup[1]}}
-        </option>
+        <ng-container *ngFor="let politicalGroup of getPoliticalGroups()">
+            <option *ngIf="getNumberOfMemberStatesWithLeaderAffiliatedTo(politicalGroup[1]) > 0" 
+                [value]="politicalGroup[0]">
+                {{politicalGroup[1]}} ({{getNumberOfMemberStatesWithLeaderAffiliatedTo(politicalGroup[1])}})
+            </option>
+        </ng-container>
     </select> 
     <span>&nbsp;</span>
     <span *ngFor="let voteKey of getAllVoteTypes()">

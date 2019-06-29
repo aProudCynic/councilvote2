@@ -13,7 +13,7 @@ export class VotingService {
 
   static readonly POPULATION_THRESHOLD_PERCENT = 65;
 
-  static readonly MEMBER_STATE_THRESHOLD_PERCENT = 55;
+  static readonly MEMBER_STATE_THRESHOLD_PERCENT = 72;
 
   votingRecord: VotingRecord = new VotingRecord('test');
   voteCast: EventEmitter<any> = new EventEmitter();

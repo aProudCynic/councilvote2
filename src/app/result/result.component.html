@@ -12,11 +12,11 @@
     <tr *ngFor="let voteResult of votingService.resultsByVotes | keyvalue">
         <ng-container *ngIf="isNotDidNotVote(voteResult.key)">
             <td>{{voteResult.key}}</td>
-            <td data-toggle="tooltip" data-placement="top" title="A szavazó tagállamokhoz képest (az igenek, a nemek és a tartózkodások aránya a kerekítések miatt eltérhet 100%-tól)">
+            <td data-toggle="tooltip" data-placement="top" title="A szavazó tagállamokhoz (igen/nem/tartózkododtt) képest (az igenek, a nemek és a tartózkodások aránya a kerekítések miatt eltérhet 100%-tól)">
                 {{voteResult.value.numberOfMemberStates | number}} 
                 ({{votingService.getVoteShareInNumberOfMemberStates(voteResult.key) | number}}%)
             </td>
-            <td data-toggle="tooltip" data-placement="top" title="A szavazó tagállamokhoz képest (az igenek, a nemek és a tartózkodások aránya a kerekítések miatt eltérhet 100%-tól)">
+            <td data-toggle="tooltip" data-placement="top" title="A szavazó tagállamokhoz (igen/nem/tartózkododtt) képest (az igenek, a nemek és a tartózkodások aránya a kerekítések miatt eltérhet 100%-tól)">
                 {{voteResult.value.population | number}}
                 ({{votingService.getVoteShareInPopulation(voteResult.key) | number}}%)
             </td>
@@ -36,7 +36,7 @@
 </table> 
 <p style="text-align: center">Tagállamok száma</p>
 <div class="progress">
-    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 55%">
+    <div class="progress-bar progress-bar-success" role="progressbar" [style.width]="getWidthForMemberStateThreshold()">
         Többséghez szükséges ({{getMemberStateThresholdPercent()}}%)
     </div>
 </div>
@@ -54,7 +54,7 @@
 
 <p style="text-align: center">Népesség</p>
 <div class="progress">
-    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 65%">
+    <div class="progress-bar progress-bar-success" role="progressbar" [style.width]="getWidthForPopulationThreshold()">
         Többséghez szükséges ({{getPopulationThresholdPercent()}}%)
     </div>
 </div>
