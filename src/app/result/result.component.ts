@@ -44,12 +44,24 @@ export class ResultComponent implements OnInit {
     return VotingService.MEMBER_STATE_THRESHOLD_PERCENT;
   }
 
+  getNumberOfMemberStatesThatHaventVoted() {
+    return this.votingService.resultsByVotes.get(Vote.DID_NOT_VOTE).numberOfMemberStates;
+  }
+
+  allMemberStatesHaveVoted() {
+    return this.getNumberOfMemberStatesThatHaventVoted() === 0;
+  }
+
   getResult() {
     let result: string;
-    if (this.votingService.isPassed()) {
+    if (!this.allMemberStatesHaveVoted()) {
+      result = 'Még ' + this.getNumberOfMemberStatesThatHaventVoted() + ' tagállam nem szavazott';
+    } else if (this.votingService.isPassed()) {
       result = 'Átment';
       if (this.votingService.isUnsuccessfulBlockingMinorty()) {
-        result += ' (legalább négy ország kell a blokkoló kisebbséghez)';
+        result += ' (legalább '
+          + VotingService.MINIMUM_NUMBER_OF_MEMBER_STATES_FOR_BLOCKING_MINORITY
+          + ' tagállam kell a blokkoló kisebbséghez)';
       }
     } else {
       result = 'Nem ment át';
@@ -76,5 +88,16 @@ export class ResultComponent implements OnInit {
 
   getWidthForPopulationThreshold(): string {
     return this.getPopulationThresholdPercent() + '%';
+  }
+
+  getBackgroundColorForResult(): string {
+    console.log(this.allMemberStatesHaveVoted());
+    if (!this.allMemberStatesHaveVoted()) {
+      return 'grey';
+    }
+    if (this.votingService.isPassed()) {
+      return 'green';
+    }
+    return 'red';
   }
 }

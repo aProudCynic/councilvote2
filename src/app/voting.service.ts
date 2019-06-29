@@ -15,6 +15,8 @@ export class VotingService {
 
   static readonly MEMBER_STATE_THRESHOLD_PERCENT = 72;
 
+  static readonly MINIMUM_NUMBER_OF_MEMBER_STATES_FOR_BLOCKING_MINORITY = 4;
+
   votingRecord: VotingRecord = new VotingRecord('test');
   voteCast: EventEmitter<any> = new EventEmitter();
   resultsByVotes: Map<Vote, PopulationAndNumberOfMemberStates> = new Map();
@@ -105,7 +107,7 @@ export class VotingService {
         this.resultsByVotes.get(Vote.NO).numberOfMemberStates + 
         this.resultsByVotes.get(Vote.ABSTAINED).numberOfMemberStates
       )
-      < 4
+      < VotingService.MINIMUM_NUMBER_OF_MEMBER_STATES_FOR_BLOCKING_MINORITY
     );
   }
   atLeastCountryVoted() {
