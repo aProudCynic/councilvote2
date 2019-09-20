@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VotingService } from '../voting.service';
-import { MemberState } from 'src/model/country.model';
-import { Vote } from 'src/model/vote.model';
-import { PoliticalGroup } from 'src/model/political-group.model';
+import { MemberState } from '../../model/country.model';
+import { Vote } from '../../model/vote.model';
+import { PoliticalGroup } from '../../model/political-group.model';
 
 @Component({
   selector: 'app-preset-buttons',

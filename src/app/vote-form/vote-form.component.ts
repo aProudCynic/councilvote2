@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { VotingService } from '../voting.service';
-import { VotingRecord } from 'src/model/voting-record.model';
-import { Vote } from 'src/model/vote.model';
-import { MemberState } from 'src/model/country.model';
-import { PoliticalGroup } from 'src/model/political-group.model';
+import { VotingRecord } from '../../model/voting-record.model';
+import { Vote } from '../../model/vote.model';
+import { MemberState } from '../../model/country.model';
+import { PoliticalGroup } from '../../model/political-group.model';
 
 @Component({
   selector: 'app-vote-form',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VotingService } from '../voting.service';
-import { Vote } from 'src/model/vote.model';
+import { Vote } from '../../model/vote.model';
 
 @Component({
   selector: 'app-result',

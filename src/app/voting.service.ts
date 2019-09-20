@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter, OnInit } from '@angular/core';
-import { VotingRecord } from 'src/model/voting-record.model';
-import { Vote } from 'src/model/vote.model';
-import { MemberState } from 'src/model/country.model';
-import { PopulationAndNumberOfMemberStates } from 'src/model/population-and-number-of-member-states.model';
+import { VotingRecord } from '../model/voting-record.model';
+import { Vote } from '../model/vote.model';
+import { MemberState } from '../model/country.model';
+import { PopulationAndNumberOfMemberStates } from '../model/population-and-number-of-member-states.model';
 
 @Injectable({
   providedIn: 'root'
